@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/masterFragment">
+
+    <fragment
+        android:id="@+id/masterFragment"
+        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.MasterFragment"
+        android:label="master_fragment"
+        tools:layout="@layout/master_fragment" >
+        <action
+            android:id="@+id/action_masterFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="https://farm6.staticflickr.com/5623/30145975463_02b8452545.jpg" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue='"Something went wrong"' />
+    </fragment>
+</navigation>
