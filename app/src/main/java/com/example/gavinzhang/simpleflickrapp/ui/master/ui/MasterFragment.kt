@@ -45,9 +45,7 @@ class MasterFragment : DaggerFragment() {
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.fetchPhotos()
         }
-        listview.setOnItemClickListener { _, _, position, l ->
 
-        }
         return view
     }
 
