@@ -1,8 +1,10 @@
 package com.example.gavinzhang.simpleflickrapp.ui.master.adapters
 
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.gavinzhang.simpleflickrapp.ui.master.utils.NetworkStatus
+import com.squareup.picasso.Picasso
 
 class BindingAdapters {
 
@@ -15,6 +17,16 @@ class BindingAdapters {
                 NetworkStatus.LOADING -> swipeRefreshLayout.isRefreshing = true
                 NetworkStatus.FAILED -> swipeRefreshLayout.isRefreshing = false
             }
+        }
+
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun loadImage(imageView: ImageView, url: String) {
+            Picasso.get()
+                    .load(url)
+                    .resize(FlickrAdapter.IMAGE_SIZE, FlickrAdapter.IMAGE_SIZE)
+                    .centerCrop()
+                    .into(imageView)
         }
     }
 }
