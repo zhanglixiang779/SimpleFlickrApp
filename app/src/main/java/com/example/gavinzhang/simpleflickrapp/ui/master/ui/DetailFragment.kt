@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.example.gavinzhang.simpleflickrapp.R
+import com.example.gavinzhang.simpleflickrapp.databinding.DetailFragmentBinding
 import com.example.gavinzhang.simpleflickrapp.ui.master.viewmodels.SharedViewModel
-import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerFragment
 
 class DetailFragment : DaggerFragment() {
@@ -19,12 +17,12 @@ class DetailFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view= inflater.inflate(R.layout.detail_fragment, container, false)
-        val picture = view.findViewById<ImageView>(R.id.picture)
+        val binding= DetailFragmentBinding.inflate(inflater, container, false)
+        val rootView = binding.root
         val url = DetailFragmentArgs.fromBundle(arguments).url
-        Picasso.get().load(url).into(picture)
+        binding.url = url
 
-        return view
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

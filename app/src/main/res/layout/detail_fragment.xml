@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.master.ui.DetailFragment">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/picture"
+    <data>
+        <variable
+            name="url"
+            type="String"/>
+    </data>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:src="@tools:sample/avatars[3]"
-        tools:ignore="ContentDescription" />
-</FrameLayout>
+        tools:context=".ui.master.ui.DetailFragment">
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@{url}"
+            tools:src="@tools:sample/avatars[3]"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+</layout>
