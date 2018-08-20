@@ -14,14 +14,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.gavinzhang.simpleflickrapp.R
+import com.example.gavinzhang.simpleflickrapp.databinding.MasterFragmentBinding
 import com.example.gavinzhang.simpleflickrapp.ui.master.adapters.FlickrAdapter
 import com.example.gavinzhang.simpleflickrapp.ui.master.data.FlickrRepository
-import com.example.gavinzhang.simpleflickrapp.ui.master.utils.NetworkStatus
 import com.example.gavinzhang.simpleflickrapp.ui.master.viewmodels.SharedViewModel
 import com.felipecsl.quickreturn.library.QuickReturnAttacher
 import com.felipecsl.quickreturn.library.widget.QuickReturnAdapter
 import com.felipecsl.quickreturn.library.widget.QuickReturnTargetView
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.master_fragment.view.*
 import javax.inject.Inject
 
 class MasterFragment : DaggerFragment() {
@@ -37,27 +38,26 @@ class MasterFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.master_fragment, container, false)
-        quickReturn = view.findViewById(R.id.quick_return)
-        imageTitle = view.findViewById(R.id.imageTitle)
-        listview = view.findViewById(R.id.listview)
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        val binding = MasterFragmentBinding.inflate(inflater, container, false)
+        val rootView = binding.root
+        binding.setLifecycleOwner(this)
+        viewModel = getViewModel()
+        binding.viewModel = viewModel
+        viewModel.titleLiveData.value = "Title"
+        quickReturn = rootView.quick_return
+        listview = rootView.findViewById(R.id.listview)
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.fetchPhotos()
         }
-        listview.setOnItemClickListener { _, _, position, l ->
 
-        }
-        return view
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = getViewModel()
         viewModel.fetchPhotos()
         observeItems()
-        observeNetworkStatus()
-        observeTitle()
     }
 
     private fun getViewModel(): SharedViewModel {
@@ -85,24 +85,6 @@ class MasterFragment : DaggerFragment() {
                 }
                 Navigation.findNavController(view).navigate(action)
             }
-        })
-    }
-
-    private fun observeNetworkStatus() {
-        viewModel.networkStatusLiveData?.observe(this, Observer {
-            when(it) {
-                NetworkStatus.LOADING -> swipeRefreshLayout.isRefreshing = true
-                NetworkStatus.LOADED -> swipeRefreshLayout.isRefreshing = false
-                else -> {
-                    //error handling
-                }
-            }
-        })
-    }
-
-    private fun observeTitle() {
-        viewModel.titleLiveData.observe(this, Observer {
-            imageTitle.text = it
         })
     }
 
