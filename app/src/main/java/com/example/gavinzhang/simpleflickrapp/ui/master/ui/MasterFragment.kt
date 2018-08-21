@@ -46,10 +46,6 @@ class MasterFragment : DaggerFragment() {
         viewModel.titleLiveData.value = "Title"
         quickReturn = rootView.quick_return
         listview = rootView.findViewById(R.id.listview)
-        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout)
-        swipeRefreshLayout.setOnRefreshListener {
-            viewModel.fetchPhotos()
-        }
 
         return rootView
     }
