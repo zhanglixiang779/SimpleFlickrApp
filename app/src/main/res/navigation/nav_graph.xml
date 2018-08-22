@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/masterFragment"
-        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.MasterFragment"
+        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.fragments.MasterFragment"
         android:label="master_fragment"
         tools:layout="@layout/master_fragment" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.DetailFragment"
+        android:name="com.example.gavinzhang.simpleflickrapp.ui.master.ui.fragments.DetailFragment"
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment" >
         <argument

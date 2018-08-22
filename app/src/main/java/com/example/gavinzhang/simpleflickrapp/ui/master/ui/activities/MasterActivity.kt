@@ -1,4 +1,4 @@
-package com.example.gavinzhang.simpleflickrapp.ui.master.ui
+package com.example.gavinzhang.simpleflickrapp.ui.master.ui.activities
 
 import android.os.Bundle
 import androidx.navigation.Navigation

@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.master.ui.MasterActivity">
+    tools:context=".ui.master.ui.activities.MasterActivity">
 
     <fragment
         android:layout_width="match_parent"

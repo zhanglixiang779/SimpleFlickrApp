@@ -1,4 +1,4 @@
-package com.example.gavinzhang.simpleflickrapp.ui.master.ui
+package com.example.gavinzhang.simpleflickrapp.ui.master.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

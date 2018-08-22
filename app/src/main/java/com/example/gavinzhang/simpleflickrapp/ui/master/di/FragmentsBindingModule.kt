@@ -1,7 +1,7 @@
 package com.example.gavinzhang.simpleflickrapp.ui.master.di
 
-import com.example.gavinzhang.simpleflickrapp.ui.master.ui.DetailFragment
-import com.example.gavinzhang.simpleflickrapp.ui.master.ui.MasterFragment
+import com.example.gavinzhang.simpleflickrapp.ui.master.ui.fragments.DetailFragment
+import com.example.gavinzhang.simpleflickrapp.ui.master.ui.fragments.MasterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -1,6 +1,6 @@
 package com.example.gavinzhang.simpleflickrapp.ui.master.di
 
-import com.example.gavinzhang.simpleflickrapp.ui.master.ui.MasterActivity
+import com.example.gavinzhang.simpleflickrapp.ui.master.ui.activities.MasterActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
