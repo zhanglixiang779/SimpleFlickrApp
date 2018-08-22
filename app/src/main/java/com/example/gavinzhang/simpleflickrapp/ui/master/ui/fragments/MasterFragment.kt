@@ -26,17 +26,25 @@ class MasterFragment : DaggerFragment() {
     @Inject
     lateinit var repository: FlickrRepository
 
-    lateinit var recyclerView: RecyclerView
-    lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    lateinit var imageTitle: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var imageTitle: TextView
     private lateinit var viewModel: SharedViewModel
+    private val recyclerViewAdapter by lazy {
+        FlickrAdapter(::callback)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.master_fragment, container, false)
         view.run {
             imageTitle = findViewById(R.id.imageTitle)
-            recyclerView = findViewById(R.id.recyclerView)
+            recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
+                adapter = recyclerViewAdapter
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+            }
+
             swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         }
 
@@ -77,13 +85,7 @@ class MasterFragment : DaggerFragment() {
 
     private fun observeItems() {
         viewModel.itemsLiveData?.observe(this, Observer {
-            val recyclerViewAdapter = FlickrAdapter(::callback)
             recyclerViewAdapter.submitList(it)
-            with(recyclerView) {
-                adapter = recyclerViewAdapter
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-            }
         })
     }
 
