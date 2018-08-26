@@ -30,7 +30,7 @@ class FlickrViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .load(url)
                 .resize(FlickrAdapter.IMAGE_SIZE, FlickrAdapter.IMAGE_SIZE)
                 .centerCrop()
-                .into(photo);
+                .into(photo)
         owner.text = item.owner
         title.text = item.title
     }

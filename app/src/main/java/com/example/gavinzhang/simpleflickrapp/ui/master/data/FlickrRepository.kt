@@ -7,8 +7,9 @@ import com.example.gavinzhang.simpleflickrapp.ui.master.utils.NetworkStatus
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class FlickrRepository(val apiService: ApiService) {
+class FlickrRepository @Inject constructor( val apiService: ApiService) {
 
     val flickrResponseLiveData = MutableLiveData<FlickrResponse>()
     val itemsLiveData = Transformations.map(flickrResponseLiveData) { it.photos.photo }

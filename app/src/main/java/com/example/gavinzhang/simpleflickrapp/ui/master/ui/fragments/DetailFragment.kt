@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.gavinzhang.simpleflickrapp.R
 import com.example.gavinzhang.simpleflickrapp.ui.master.viewmodels.SharedViewModel
@@ -29,13 +27,7 @@ class DetailFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!, object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return SharedViewModel (null) as T
-            }
-
-        }).get(SharedViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(SharedViewModel::class.java)
     }
 
     override fun onDetach() {

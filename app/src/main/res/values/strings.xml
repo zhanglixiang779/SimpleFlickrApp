@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">SimpleFlickrApp</string>
     <string name="title">Title</string>
-    <string name="quick_return">Quick Return</string>
 </resources>

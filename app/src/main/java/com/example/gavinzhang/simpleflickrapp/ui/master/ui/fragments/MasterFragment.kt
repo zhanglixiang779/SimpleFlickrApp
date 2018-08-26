@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.gavinzhang.simpleflickrapp.R
 import com.example.gavinzhang.simpleflickrapp.ui.master.adapters.FlickrAdapter
-import com.example.gavinzhang.simpleflickrapp.ui.master.data.FlickrRepository
 import com.example.gavinzhang.simpleflickrapp.ui.master.utils.NetworkStatus
 import com.example.gavinzhang.simpleflickrapp.ui.master.viewmodels.SharedViewModel
 import dagger.android.support.DaggerFragment
@@ -24,12 +23,11 @@ import javax.inject.Inject
 class MasterFragment : DaggerFragment() {
 
     @Inject
-    lateinit var repository: FlickrRepository
+    lateinit var viewModel: SharedViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var imageTitle: TextView
-    private lateinit var viewModel: SharedViewModel
     private val recyclerViewAdapter by lazy {
         FlickrAdapter(::callback)
     }
@@ -64,11 +62,11 @@ class MasterFragment : DaggerFragment() {
         observeTitle()
     }
 
-    private fun getViewModel(): SharedViewModel {
+    internal fun getViewModel(): SharedViewModel {
         return ViewModelProviders.of(activity!!, object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return SharedViewModel (repository) as T
+                return viewModel as T
             }
 
         }).get(SharedViewModel::class.java)
@@ -80,6 +78,7 @@ class MasterFragment : DaggerFragment() {
             setUrl(url)
             setTitle(title)
         }
+
         Navigation.findNavController(view).navigate(action)
     }
 
@@ -90,13 +89,11 @@ class MasterFragment : DaggerFragment() {
     }
 
     private fun observeNetworkStatus() {
-        viewModel.networkStatusLiveData?.observe(this, Observer {
-            when(it) {
+        viewModel.networkStatusLiveData.observe(this, Observer {
+            when (it!!) {
                 NetworkStatus.LOADING -> swipeRefreshLayout.isRefreshing = true
                 NetworkStatus.LOADED -> swipeRefreshLayout.isRefreshing = false
-                else -> {
-                    //error handling
-                }
+                NetworkStatus.FAILED -> swipeRefreshLayout.isRefreshing = false
             }
         })
     }

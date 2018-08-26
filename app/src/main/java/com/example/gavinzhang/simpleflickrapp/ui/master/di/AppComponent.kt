@@ -7,8 +7,8 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidSupportInjectionModule::class,
-        AppModule::class, ActivitiesBindingModule::class))
+@Component(modules = [AndroidSupportInjectionModule::class, AppModule::class,
+    ActivitiesBindingModule::class])
 interface AppComponent : AndroidInjector<FlickrApplication> {
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<FlickrApplication>()
